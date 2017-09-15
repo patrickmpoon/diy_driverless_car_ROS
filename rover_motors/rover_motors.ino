@@ -30,24 +30,28 @@ void cmdVelCB( const geometry_msgs::Twist& twist)
     analogWrite(ENA, abs(left_wheel_data));
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
-  }
-  else
-  {
+    digitalWrite(IN3, HIGH);
+    digitalWrite(IN4, LOW);
+  } else {
     analogWrite(ENA, abs(left_wheel_data));
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, HIGH);
   }
-  if (right_wheel_data >= 0)
-  {
+
+  if (right_wheel_data >= 0) {
     analogWrite(ENB, abs(right_wheel_data));
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
-  }
-  else
-  {
+    digitalWrite(IN3,LOW);
+    digitalWrite(IN4,HIGH);
+  } else {
     analogWrite(ENB, abs(right_wheel_data));
     digitalWrite(IN3, LOW);
     digitalWrite(IN4, HIGH);
+    digitalWrite(IN3, HIGH);
+    digitalWrite(IN4, LOW);
   }
 }
 
