@@ -8,12 +8,12 @@
 #include <ros.h>
 #include <geometry_msgs/Twist.h>
 
-#define ENA 5
-#define ENB 11
-#define IN1 6
-#define IN2 7
-#define IN3 8
-#define IN4 9
+#define ENA 10
+#define ENB 5
+#define IN1 9
+#define IN2 8
+#define IN3 7
+#define IN4 6
 
 float L = 0.1; //distance between wheenls
 
@@ -24,30 +24,30 @@ void cmdVelCB( const geometry_msgs::Twist& twist)
   int gain = 700;
   float left_wheel_data = gain*(twist.linear.x + twist.angular.z*L);
   float right_wheel_data = gain*(twist.linear.x - twist.angular.z*L);
-  
+
   if (left_wheel_data >= 0)
-  {
-    analogWrite(ENA, abs(left_wheel_data));
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-  }
-  else
   {
     analogWrite(ENA, abs(left_wheel_data));
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
   }
-  if (right_wheel_data >= 0)
-  {
-    analogWrite(ENB, abs(right_wheel_data));
-    digitalWrite(IN3, LOW);
-    digitalWrite(IN4, HIGH);
-  }
   else
+  {
+    analogWrite(ENA, abs(left_wheel_data));
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+  }
+  if (right_wheel_data >= 0)
   {
     analogWrite(ENB, abs(right_wheel_data));
     digitalWrite(IN3, HIGH);
     digitalWrite(IN4, LOW);
+  }
+  else
+  {
+    analogWrite(ENB, abs(right_wheel_data));
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, HIGH);
   }
 }
 
