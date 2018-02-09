@@ -52,8 +52,11 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <!-- Record data  -->
   <node pkg="rosbag" type="record" name="rosbag_record_all"
-    args="-a -o $(find rover_teleop)/data/rover"
+    args="-a -o /mnt/sandisk256g/elegoo/capture/data/rover"
     if="$(arg record_cam)" />   
+
+  <!-- View camera -->
+  <node pkg="web_video_server" name="web_video_server" type="web_video_server" />
 
 
 </launch>
